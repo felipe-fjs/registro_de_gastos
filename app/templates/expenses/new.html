@@ -4,7 +4,7 @@
 
 {% block content %}
 <main>
-    <form action="{{ url_for('expenses.new_expense')}}" method="post">
+    <form id="new_expense_form" action="{{ url_for('expenses.new_expense')}}" method="post">
         <p>
             <label for="title">Título</label>
             <input type="text" name="title" id="title" required maxlength="150">
