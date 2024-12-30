@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %} Novo gasto {% endblock %}
+
+{% block content %}
+<main>
+    <form action="{{ url_for('expenses.new_expense')}}" method="post">
+        <p>
+            <label for="title">Título</label>
+            <input type="text" name="title" id="title" required maxlength="150">
+        </p>
+        <p>
+            <label for="category">Categoria</label>
+            <input type="text" list="category_list" id="category" name="category" required>
+            <datalist id="category_list">
+                {% if categories %}
+                    {% for category in categories %}
+                        <option value="{{ category.id }}">{{ category.name }}</option>
+                    {% endfor %}
+                {% endif %}
+            </datalist>
+        </p>
+        <p>
+            <label for="total">Total</label>
+            <input type="number" name="total" id="total" step="0.01" required>
+        </p>
+        <p>
+            <label for="local">Local/Estabelecimento</label>
+            <input type="text" list="local_list" id="local" name="local" required>
+            <datalist id="local_list">
+                {% if locals %}
+                    {% for local in locals %}
+                        <option value="{{ local.id}}">{{ local.name }}</option>
+                    {% endfor %}
+                {% endif %}
+            </datalist>
+        </p>
+        <p>
+            <label for="data">Data</label>
+            <input type="datetime-local" name="data" id="data" required>
+        </p>
+        <p>
+            <button type="submit">Registrar</button>
+        </p>
+    </form>
+</main>
+{% endblock %}
