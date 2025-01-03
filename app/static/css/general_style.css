@@ -12,10 +12,26 @@ body, html {
     background-color: #B3C5D7;
 }
 
-main {
-    
+header {
+    height: 50px;
 }
 
-#new_expenses_form {
-    
+main {
+    height: calc(100vh - 50px);
+}
+
+.expenses_section {
+    width: 100%;
+    height: fit-content;
+
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: center;
+
+}   
+
+.expenses_form {
+    width: 80%;
+    background-color: white;
 }
