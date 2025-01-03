@@ -10,6 +10,9 @@
     {% block head %} {% endblock %}
 </head>
 <body>
+    <!--Adicionando navbar atraves de um arquivo já existente-->
+    {% include "partials/navbar.html" %}
+
     {% block content  %} {% endblock %}
 
     <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js')}}"></script>
