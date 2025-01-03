@@ -1,14 +1,12 @@
 <header class="header">
-    icon
+    <h1 class="navbar-title">Gastos</h1>
     <nav class="navbar">
-        <a href="#">ínicio</a>
-        {% if current_user.is_authenticated %}
-            <a href="#">novo gasto</a>
-            <a href="#">gastos existentes</a>
-            <a href="#">sair</a>
-        {% else %}
-            <a href="#">entrar</a>
-            <a href="#">cadastrar-se</a>
-        {% endif %}
+            <a class="navbar-link" href="#">ínicio</a>
+            <a class="navbar-link" href="#">novo gasto</a>
+            <a class="navbar-link" href="#">gastos existentes</a>
+            <a class="navbar-link" href="#">sair</a>
+
+            <a class="navbar-link" href="#">entrar</a>
+            <a class="navbar-link" href="#">cadastrar-se</a>
     </nav>
 </header>
