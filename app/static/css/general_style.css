@@ -12,12 +12,38 @@ body, html {
     background-color: #B3C5D7;
 }
 
-header {
-    height: 50px;
+header.header {
+    height: fit-content;
+    background-color: #22577A;
+
+    padding: 5px 10px;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 1px 1px 0.5px rgba(0, 0, 0, 0.442);
+}
+
+.navbar-title {
+    color: white;
+    text-shadow: 0 0 1px black;
+
+}
+
+.navbar {
+    display: flex;
+    flex-flow: column;
+    align-items: flex-start;
+
+}
+
+.navbar-link{
+    display: block;
+    color: white;
+    text-decoration: none;
+    border-bottom: 1px solid white;
 }
 
 main {
-    height: calc(100vh - 50px);
+    /* height: calc(100vh - 50px); */
+    padding: 10px;
 }
 
 .expenses_section {
