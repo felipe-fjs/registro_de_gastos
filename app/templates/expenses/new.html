@@ -9,7 +9,7 @@
         <form class="expenses_form" action="{{ url_for('expenses.new_expense')}}" method="post">
             <p>
                 <label class="form-label" for="title">Título</label>
-                <input class="form-control" type="text" name="title" id="title" required maxlength="150">
+                <input class="form-control" type="text" name="title" id="title" maxlength="150" required>
             </p>
             <p>
                 <label class="form-label" for="category">Categoria</label>
