@@ -2,6 +2,8 @@ from app import db
 from flask import Blueprint, request, render_template, redirect, url_for, flash
 from sqlalchemy.exc import SQLAlchemyError
 from ...models.expenses import Expenses
+from ...models.local import Local   
+from ...models.category import Category
 import datetime
 
 expenses_route = Blueprint('expenses', __name__)
@@ -28,8 +30,12 @@ def new_expense():
             flash(f"Ocorreu um erro ao registrar o gasto '{request.form.get('title')}'")
     
         return redirect(url_for('expenses.new_expense'))
+    # pegar informações de categorias e loais já cadastrados em bando de dados
+    try:
+        local = Local.query.all()
+        category = Category.query.all()
+    except SQLAlchemyError:
+        flash("Ocorreu um erro ao carregar informações de categoria ou locais")
 
-    data = datetime.datetime.now(datetime.UTC)
-    print(data.isoformat())
-    return render_template("expenses/new.html", data=data)
+    return render_template("expenses/new.html", local=local, category=category)
 
