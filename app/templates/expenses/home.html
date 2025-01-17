@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block head %} {% endblock %}
+
+{% block content %}
+
+    <main>
+        {% if expenses %}
+            <section class="expense-card-section">
+                {% for expense in expenses %}
+                    <div class="expense-card">
+                        <h3 class="expense-card-title">TITLE</h3>
+                        <span class="expense-card-info">
+                            <span class="expense-card-category">categoria: none</span>
+                            <span class="expense-card-amount">valor: none</span>
+                            <span class="expense-card-data">data: none</span>
+                        </span>
+                    </div>
+                {% endfor %}
+            </section>
+            
+
+        {% else %}
+            <h2 class="alert alert-warning">Nenhum gasto foi registrado!</h2>
+        {% endif %} 
+    </main>
+
+{% endblock %}
+
+{% block script %} {% endblock %}
