@@ -1,11 +1,19 @@
 from app import db
 from flask import Blueprint, request, render_template, redirect, url_for, flash
+from flask_login import current_user, login_required
 from sqlalchemy.exc import SQLAlchemyError
 from ...models.expenses import Expenses
 from ...models.local import Local   
 from ...models.category import Category
 
 expenses_route = Blueprint('expenses', __name__)
+
+
+@expenses_route.route('/')
+@expenses_route.route('/inicio')
+def home():
+    expenses = Expenses.query.filter_by(user_id=current_user.id)
+    return 
 
 @expenses_route.route("/novo-gasto", methods=['GET', 'POST'])
 # @login_required
@@ -19,6 +27,7 @@ def new_expense():
             new_exp.amount = request.form.get('total')   
             new_exp.local_id = request.form.get('local_id')
             new_exp.date = request.form.get('data')
+            new_exp.user_id = current_user.id
 
             # registra o novo gasto
             db.session.add(new_exp)
@@ -37,3 +46,8 @@ def new_expense():
 
     return render_template("expenses/new.html", local=local, category=category)
 
+@expenses_route.route('/gasto-<id>', methods=['GET'], defaults={'id': None})
+def edit_expense(id):
+    if not id:
+        return redirect(url_for('expenses.home'))
+    return ''

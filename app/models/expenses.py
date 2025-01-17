@@ -11,3 +11,4 @@ class Expenses(db.Model):
     date = Column(DateTime(), nullable=False, default=datetime.datetime.now(datetime.UTC))
     category_id = Column(Integer, ForeignKey('categories.id'), nullable=True)
     local_id = Column(Integer, ForeignKey('locals.id'), nullable=True)
+    user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
