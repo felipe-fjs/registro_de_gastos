@@ -19,3 +19,7 @@ import app.models.models as models
 
 # Registro das rostas atraves do arquivo __init__ no diretorio routes
 import app.controllers.routes as routes 
+
+
+login_manager.login_message = 'Você precisa estar logado!'
+login_manager.login_view = 'account.login'
