@@ -6,12 +6,15 @@
         <span class="navbar-title">Gastos</span>
     </section>
     <nav class="navbar" id="navbar">
+        {% if current_user.is_authenticated %}
             <a class="navbar-link" href="#">ínicio</a>
             <a class="navbar-link" href="#">novo gasto</a>
-            <a class="navbar-link" href="#">gastos existentes</a>
             <a class="navbar-link" href="#">sair</a>
-
+        
+        {% else %}
             <a class="navbar-link" href="#">entrar</a>
-            <a class="navbar-link" href="#">cadastrar-se</a>
+            <a class="navbar-link" href="#">cadastrar-se</a>    
+        {% endif %}
+
     </nav>
 </header>
