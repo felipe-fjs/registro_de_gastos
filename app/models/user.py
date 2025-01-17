@@ -7,7 +7,7 @@ class User(db.Model, UserMixin):
 
     id = Column(Integer, primary_key=True, nullable=False)
     email = Column(String(120), unique=True, nullable=False)
-    pwd = Column(String(128), unique=False, nullable=False)
+    pwd = Column(String(64), unique=False, nullable=False)
 
     def verify_pwd(self, pwd):
         return bcrypt.check_password_hash(self.pwd, pwd)
