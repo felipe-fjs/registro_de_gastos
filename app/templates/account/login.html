@@ -2,11 +2,14 @@
 
 {% block title %}Login {% endblock %}
 
+{% block header %} <!--Aqui ficará vazio para não haver a navbar no arquivo de login.html--> {% endblock %}
+
 {% block content %}
 
      <main>
         <section class="account-form-section">
            <form action="{{ url_for('account.login')}}" method="post" class="account-form">
+                <h1>Gastos - Login</h1>
                 <p>
                     <label for="email" class="form-label">Email</label>
                     <input type="text" name="email" id="email" required class="form-control">

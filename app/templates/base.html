@@ -11,7 +11,9 @@
 </head>
 <body>
     <!--Adicionando navbar atraves de um arquivo já existente-->
-    {% include "partials/navbar.html" %}
+    {% block header %}
+        {% include "partials/navbar.html" %}
+    {%  endblock %}
 
     {% block content  %} {% endblock %}
 

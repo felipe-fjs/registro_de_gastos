@@ -2,11 +2,14 @@
 
 {% block title %}Cadastre-se {% endblock %}
 
+{% block header %} <!--Aqui ficará vazio para não haver a navbar no arquivo de signup.html--> {% endblock %}
+
 {% block content %}
 
      <main>
         <section class="account-form-section">
-           <form action="{{ url_for('account.signup')}}" method="post">
+           <form action="{{ url_for('account.signup')}}" method="post" class="account-form">
+                <h1>Gastos - Cadastro</h1>
                 <p>
                     <label for="email" class="form-label">Email</label>
                     <input type="text" name="email" id="email" required class="form-control">
