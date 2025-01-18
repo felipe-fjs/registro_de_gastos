@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Cadastre-se {% endblock %}
+
+{% block content %}
+
+     <main>
+        <section class="account-form-section">
+           <form action="{{ url_for('account.signup')}}" method="post">
+                <p>
+                    <label for="email" class="form-label">Email</label>
+                    <input type="text" name="email" id="email" required class="form-control">
+                </p>
+                <p>
+                    <label for="name">Nome</label>
+                    <input type="text" name="name" id="name" required maxlength="120" class="form-control">
+                </p>
+                <p>
+                    <label for="pwd">Senha</label>
+                    <input type="password" name="pwd" id="pwd" required class="form-control">
+                </p>
+                <p>
+                    <label for="check-pwd">Repita a senha</label>
+                    <input type="password" name="check-pwd" id="check-pwd" required class="form-control">
+                </p>
+                <p>
+                    <button type="submit" class="btn btn-primary">Cadastrar</button>
+                    <span>Já tem conta? <a href="{{ url_for('account.login')}}">Login</a></span>
+                </p>
+            </form> 
+        </section>
+        
+     </main>
+
+{% endblock %}
+
+{% block script %} {% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Login {% endblock %}
+
+{% block content %}
+
+     <main>
+        <section class="account-form-section">
+           <form action="{{ url_for('account.login')}}" method="post">
+                <p>
+                    <label for="email" class="form-label">Email</label>
+                    <input type="text" name="email" id="email" required class="form-control">
+                </p>
+                <p>
+                    <label for="pwd">Senha</label>
+                    <input type="password" name="pwd" id="pwd" required class="form-control">
+                    <span class="reset-key">Esqueci a senha</span>
+                </p>
+                <p>
+                    <button type="submit" class="btn btn-primary">Entrar</button><br>
+                    <span>Não tem conta? <a href="{{ url_for('account.signup')}}">Cadastre-se</a></span>
+                </p>
+            </form> 
+        </section>
+        
+     </main>
+
+{% endblock %}
+
+{% block script %} {% endblock %}
