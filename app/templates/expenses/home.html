@@ -6,7 +6,8 @@
 
     <main>
         {% if expenses %}
-            <section class="expense-card-section">
+            <section class="expenses-section">
+                <section class="expense-card-section">
                 {% for expense in expenses %}
                     <div class="expense-card">
                         <h3 class="expense-card-title">TITLE</h3>
@@ -16,8 +17,10 @@
                             <span class="expense-card-data">data: none</span>
                         </span>
                     </div>
-                {% endfor %}
+                {% endfor %}    
             </section>
+            </section>
+            
             
 
         {% else %}

@@ -64,11 +64,18 @@ header.header {
 }
 
 main {
-    /* height: calc(100vh - 50px); */
+    height: calc(100vh - 50px);
+    width: 100%;
     padding: 10px;
 }
 
-.expenses_section {
+/* @media screen and (min-width: 1080px) {
+    main {
+        width: 400px;
+    }
+} */
+
+.expenses_section, .account-form-section {
     width: 100%;
     height: fit-content;
 
@@ -78,6 +85,19 @@ main {
     justify-content: center;
 
 }   
+
+.account-form-section {
+    height: 100%;
+}
+
+.account-form {
+    width: 400px;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.47);
+    background-color: rgba(255, 255, 255, 0.488);
+
+}
 
 .expenses_form {
     width: 80%;

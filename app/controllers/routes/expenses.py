@@ -11,12 +11,13 @@ expenses_route = Blueprint('expenses', __name__)
 
 @expenses_route.route('/')
 @expenses_route.route('/inicio')
+@login_required
 def home():
     expenses = Expenses.query.filter_by(user_id=current_user.id)
-    return 
+    return render_template('expenses/home.html', expenses=expenses)
 
 @expenses_route.route("/novo-gasto", methods=['GET', 'POST'])
-# @login_required
+@login_required
 def new_expense():
     if request.method == 'POST':
         try:
