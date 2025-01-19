@@ -10,9 +10,14 @@
         <section class="account-form-section">
            <form action="{{ url_for('account.signup')}}" method="post" class="account-form">
                 <h1>Gastos - Cadastro</h1>
-                <p>
+                <p id="email_p">
                     <label for="email" class="form-label">Email</label>
                     <input type="text" name="email" id="email" required class="form-control">
+
+                    <span id="email_exists">Email já cadastrado!</span>
+                    <img id="progress_icon" src="../../static/images/progress.png" alt="">
+                    <img id="true_icon" src="../../static/images/checked.png" alt="">
+                    <img id="false_icon" src="../../static/images/block.png" alt="">
                 </p>
                 <p>
                     <label for="name">Nome</label>
@@ -37,4 +42,46 @@
 
 {% endblock %}
 
-{% block script %} {% endblock %}
+{% block javascript %} 
+     <script>
+        let verify_url = `{{ url_for('account.verify_email')}}` 
+        let email = document.getElementById('email')
+
+        let progress_icon = document.getElementById('progress_icon')
+        let true_icon = document.getElementById('true_icon')
+        let false_icon = document.getElementById('false_icon')
+        let message = document.getElementById('email_exists')
+        
+        function verify_email(){
+            
+            if (email.value) {
+                true_icon.style.display = 'none'
+                false_icon.style.display = 'none'
+                message.style.display = 'none'
+
+                progress_icon.style.display = 'initial'
+                fetch(`${verify_url}/${email.value}`, {
+                    method: 'GET'
+                })
+                
+                .then((response) => {
+                    progress_icon.style.display = 'none'
+
+                    return response.json()
+                })
+                .then(data => {
+                    if (data['exists']) {
+                        false_icon.style.display = 'initial'
+                        message.style.display = 'initial'
+                        console.log(data['exists'])
+                    } else {
+                        true_icon.style.display = 'initial'
+                        console.log(data['exists'])
+                    }
+                })
+            }
+        }
+
+        document.getElementById('email').addEventListener('blur', verify_email)
+     </script>
+{% endblock %}
