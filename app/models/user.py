@@ -11,3 +11,6 @@ class User(db.Model, UserMixin):
 
     def verify_pwd(self, pwd):
         return bcrypt.check_password_hash(self.pwd, pwd)
+    
+    def new_pwd(self, pwd):
+        self.pwd = bcrypt.generate_password_hash(pwd)
