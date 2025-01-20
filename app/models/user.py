@@ -1,6 +1,7 @@
 from app import db, login_manager, bcrypt
 from flask_login.mixins import UserMixin
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
+import datetime
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
@@ -14,3 +15,17 @@ class User(db.Model, UserMixin):
     
     def new_pwd(self, pwd):
         self.pwd = bcrypt.generate_password_hash(pwd)
+
+
+def current_time():
+    return datetime.datetime.now(datetime.UTC)
+
+class Profile(db.Model):
+    __tablename__ = 'profiles'
+
+    id = Column(Integer, primary_key=True, nullable=False)
+    user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
+    name = Column(String(160), nullable=False)
+    birth = Column(DateTime(), nullable=False)
+    created_at = Column(DateTime(), default=current_time(), nullable=False)
+    updated_at = Column(DateTime(), onupdate=current_time(), nullable=False)
