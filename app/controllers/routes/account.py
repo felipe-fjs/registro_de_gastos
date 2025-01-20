@@ -27,18 +27,18 @@ def signup():
 
             db.session.add(new_user)
             db.session.flush()
-
+            print(new_user.id)
             new_profile = Profile()
             new_profile.user_id = new_user.id
             new_profile.name = request.form.get('name')
             new_profile.birth = request.form.get('birth')
-
+            print(new_profile.id)
             db.session.add(new_profile)
 
             db.session.commit()
 
-        except SQLAlchemyError:
-            flash('Ocorreu um erro ao tentar se registrar!')
+        except SQLAlchemyError as error:
+            flash(f'Ocorreu um erro ao tentar se registrar!{error}')
             return redirect(url_for('account.signup'))
         
         flash('Cadastro realizado com sucesso!')

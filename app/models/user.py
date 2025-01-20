@@ -28,4 +28,5 @@ class Profile(db.Model):
     name = Column(String(160), nullable=False)
     birth = Column(Date(), nullable=False)
     created_at = Column(DateTime(), default=current_time(), nullable=False)
-    updated_at = Column(DateTime(), onupdate=current_time(), nullable=False)
+    updated_at = Column(DateTime(), default=current_time(), onupdate=current_time(), nullable=False)
+    
