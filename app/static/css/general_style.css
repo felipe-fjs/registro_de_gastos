@@ -120,13 +120,19 @@ main {
     position: relative;
 }
 
+.email_exists_alert {
+    box-shadow: 0 0 5px 1.5px rgba(255, 0, 0, 0.51);
+}
+
 #true_icon, #false_icon, #progress_icon {
     width: 28px;
     position: absolute;
     right: 5px;
     bottom: 5px;
 }
-
+#false_icon {
+    bottom: 28px;
+}
 #progress_icon {
     bottom: 8px;
     width: 20px;
