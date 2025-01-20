@@ -5,11 +5,16 @@
 {% block header %} <!--Aqui ficará vazio para não haver a navbar no arquivo de signup.html--> {% endblock %}
 
 {% block content %}
-
+    {% set messages = get_flashed_messages() %}
      <main>
         <section class="account-form-section">
            <form action="{{ url_for('account.signup')}}" method="post" class="account-form">
                 <h1>Gastos - Cadastro</h1>
+                {% if messages %}
+                    {% for message in messages %}
+                        <p class="alert alert-warning">{{ message }}</p>
+                    {% endfor %}
+                {% endif %}
                 <p id="email_p">
                     <label for="email" class="form-label">Email</label>
                     <input type="text" name="email" id="email" required class="form-control">
@@ -25,7 +30,7 @@
                 </p>
                 <p>
                     <label for="birth" class="form-label">Data de nascimento</label>
-                    <input type="datetime-local" name="birth" id="birth" required class="form-control">
+                    <input type="date" name="birth" id="birth" required class="form-control">
 
                 </p>
                 <p>
@@ -78,9 +83,13 @@
                     if (data['exists']) {
                         false_icon.style.display = 'initial'
                         message.style.display = 'initial'
+                        email.classList.add('email_exists_alert')
+
                         console.log(data['exists'])
                     } else {
                         true_icon.style.display = 'initial'
+                        email.classList.add('email_noexists_alert')
+
                         console.log(data['exists'])
                     }
                 })
