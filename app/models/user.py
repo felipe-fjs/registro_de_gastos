@@ -24,7 +24,7 @@ class Profile(db.Model):
     __tablename__ = 'profiles'
 
     id = Column(Integer, primary_key=True, nullable=False)
-    user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
+    user_id = Column(Integer, ForeignKey('users.id', ondelete='CASCADE'), nullable=False)
     name = Column(String(160), nullable=False)
     birth = Column(Date(), nullable=False)
     created_at = Column(DateTime(), default=current_time(), nullable=False)

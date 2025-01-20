@@ -5,11 +5,16 @@
 {% block header %} <!--Aqui ficará vazio para não haver a navbar no arquivo de login.html--> {% endblock %}
 
 {% block content %}
-
+    {% set messages = get_flashed_messages() %}
      <main>
         <section class="account-form-section">
            <form action="{{ url_for('account.login')}}" method="post" class="account-form">
                 <h1>Gastos - Login</h1>
+                {% if messages %}
+                    {% for message in messages %}
+                        <p class="alert">{{ message }}</p>
+                    {% endfor %}
+                {% endif %}
                 <p>
                     <label for="email" class="form-label">Email</label>
                     <input type="text" name="email" id="email" required class="form-control">
