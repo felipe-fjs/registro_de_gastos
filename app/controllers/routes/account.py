@@ -1,18 +1,33 @@
 from app import db, login_manager
 from app.models.user import User, Profile
 from flask import Blueprint,  render_template, request, redirect, url_for, jsonify, flash
+from flask_login import login_user, logout_user
 from sqlalchemy.exc import SQLAlchemyError
 
 account_route = Blueprint('account', __name__)
 
 @login_manager.user_loader
 def get_user(id):
-    return User.query.filter_by(user_id=id).first()
+    return User.query.filter_by(id=id).first()
 
 @account_route.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        pass
+        try:
+            if not User.query.filter_by(email=request.form.get('email')).first():
+                flash("Email não cadastrado!")
+                return redirect(url_for('account.login'))
+            
+            user = User.query.filter_by(email=request.form.get('email')).first()
+            if user.verify_pwd(request.form.get('pwd')):
+                login_user(user)
+                return redirect(url_for('expenses.home'))
+            
+            flash("Senha incorreta!")
+            return redirect(url_for('account.login'))
+        except SQLAlchemyError as error:
+            pass
+
     return render_template('account/login.html')
 
 
