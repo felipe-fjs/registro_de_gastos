@@ -13,7 +13,7 @@
             </p>
             <p>
                 <label class="form-label" for="category">Categoria</label>
-                <input class="form-control" type="text" list="category_list" id="category" name="category" required>
+                <input class="form-control" type="text" list="category_list" id="category" name="category" >
                 <datalist id="category_list">
                     {% if categories %}
                         {% for category in categories %}
@@ -28,7 +28,7 @@
             </p>
             <p>
                 <label class="form-label" for="local">Local/Estabelecimento</label>
-                <input class="form-control" type="text" list="local_list" id="local" name="local" required>
+                <input class="form-control" type="text" list="local_list" id="local" name="local">
                 <datalist id="local_list">
                     {% if locals %}
                         {% for local in locals %}
