@@ -47,8 +47,21 @@ def new_expense():
 
     return render_template("expenses/new.html", local=local, category=category)
 
+
 @expenses_route.route('/gasto-<id>', methods=['GET'], defaults={'id': None})
+@login_required
+def read_expense(id):
+    if not id:
+        return redirect(url_for('expenses.home'))
+    
+    expense = Expenses.query.filter_by(id=id, user_id=current_user.id)
+    return render_template('expenses/read.html', expense=expense)
+
+
+@expenses_route.route('/gasto-<id>', methods=['GET'], defaults={'id': None})
+@login_required
 def edit_expense(id):
     if not id:
         return redirect(url_for('expenses.home'))
+    
     return ''
