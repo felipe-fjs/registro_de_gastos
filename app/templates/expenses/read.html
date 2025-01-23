@@ -29,8 +29,12 @@
                     <input type="datetime-local" name="data" id="data" class="form-control" value="{{ expense.date }}">
                 </p>
                 <p>
-                    <button class="btn btn-primary">Editar</button>
-                    <button class="btn btn-danger">Excluir</button>
+                    <a href="{{ url_for('expenses.edit_expense', id=expense.id)}}" class="btn btn-primary">
+                        Editar
+                    </a>
+                    <a href="{{ url_for('expenses.delete_expense', id=expense.id)}}"q class="btn btn-danger">
+                        Excluir
+                    </a>
                 </p>
             </form>
         </section>
