@@ -10,11 +10,11 @@
                 <section class="expense-card-section">
                 {% for expense in expenses %}
                     <div class="expense-card">
-                        <h3 class="expense-card-title">TITLE</h3>
+                        <h3 class="expense-card-title"><a href="{{ url_for('expenses.read_expense', id=expense.id, title=expense.title)}}">{{ expense.title}}</a></h3>
                         <span class="expense-card-info">
-                            <span class="expense-card-category">categoria: none</span>
-                            <span class="expense-card-amount">valor: none</span>
-                            <span class="expense-card-data">data: none</span>
+                            <span class="expense-card-category">categoria: {{ expense.get_category_name() }}</span>
+                            <span class="expense-card-amount">valor: R$ {{ expense.amount }}</span>
+                            <span class="expense-card-data">data: {{ expense.date }}</span>
                         </span>
                     </div>
                 {% endfor %}    
@@ -30,4 +30,4 @@
 
 {% endblock %}
 
-{% block script %} {% endblock %}
+{% block script %}  {% endblock %}
