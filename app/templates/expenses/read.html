@@ -10,29 +10,29 @@
             <form aria-disabled='true' class="expenses_form"  >
                 <p>
                     <label for="title">Titulo</label>]
-                    <input type="text" name="title" id="title"  class="form-control" value="{{ expense.title }}">
+                    <input type="text" name="title" id="title"  class="form-control" value="{{ expense.title }}" disabled>
                 </p>
                 <p>
                     <label for="category">Categoria</label>
-                    <input type="text" name="category" id="category" class="form-control" value="{{ expense.get_category_name()}}">
+                    <input type="text" name="category" id="category" class="form-control" value="{{ expense.get_category_name() }}" disabled>
                 </p>
                 <p>
                     <label for="total" class="form-label">Total</label>
-                    <input type="number" name="total" id="total" class="form-control" value="{{ expense.amount }}">
+                    <input type="number" name="total" id="total" class="form-control" value="{{ expense.amount }}" disabled>
                 </p>
                 <p>
                     <label for="local" class="form-label">Local</label>
-                    <input type="text" name="local" id="local" class="form-control" value="{{ expense.get_local_name() }}">
+                    <input type="text" name="local" id="local" class="form-control" value="{{ expense.get_local_name() }}" disabled>
                 </p>
                 <p>
                     <label for="data">Data</label>
-                    <input type="datetime-local" name="data" id="data" class="form-control" value="{{ expense.date }}">
+                    <input type="datetime-local" name="data" id="data" class="form-control" value="{{ expense.date }}" disabled>
                 </p>
                 <p>
-                    <a href="{{ url_for('expenses.edit_expense', id=expense.id)}}" class="btn btn-primary">
+                    <a href="{{ url_for('expenses.edit_expense', id=expense.id, title=expense.title)}}" class="btn btn-primary">
                         Editar
                     </a>
-                    <a href="{{ url_for('expenses.delete_expense', id=expense.id)}}"q class="btn btn-danger">
+                    <a href="{{ url_for('expenses.delete_expense', id=expense.id, title=expense.title)}}"q class="btn btn-danger">
                         Excluir
                     </a>
                 </p>
