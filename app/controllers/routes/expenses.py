@@ -48,17 +48,17 @@ def new_expense():
     return render_template("expenses/new.html", local=local, category=category)
 
 
-@expenses_route.route('/gasto-<id>', methods=['GET'], defaults={'id': None})
+@expenses_route.route('/gasto-<id>/<title>', methods=['GET'])
 @login_required
-def read_expense(id):
+def read_expense(id, title):
     if not id:
         return redirect(url_for('expenses.home'))
     
-    expense = Expenses.query.filter_by(id=id, user_id=current_user.id)
+    expense = Expenses.query.filter_by(id=id, user_id=current_user.id).first()
     return render_template('expenses/read.html', expense=expense)
 
 
-@expenses_route.route('/gasto-<id>/edit', methods=['GET', 'PUT'], defaults={'id': None})
+@expenses_route.route('/gasto-<id>/<title>/edit', methods=['GET', 'PUT'])
 @login_required
 def edit_expense(id):
     if not id:
@@ -67,7 +67,7 @@ def edit_expense(id):
     return ''
 
 
-@expenses_route.route('/gasto-<id>/delete', methods=['GET', 'DELETE'], defaults={'id': None})
+@expenses_route.route('/gasto-<id>/<title>/delete', methods=['GET', 'DELETE'])
 def delete_expense(id):
     if not id:
         return redirect(url_for('expenses.home'))
