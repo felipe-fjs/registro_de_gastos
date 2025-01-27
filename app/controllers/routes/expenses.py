@@ -58,10 +58,18 @@ def read_expense(id):
     return render_template('expenses/read.html', expense=expense)
 
 
-@expenses_route.route('/gasto-<id>', methods=['GET'], defaults={'id': None})
+@expenses_route.route('/gasto-<id>/edit', methods=['GET', 'PUT'], defaults={'id': None})
 @login_required
 def edit_expense(id):
     if not id:
         return redirect(url_for('expenses.home'))
     
     return ''
+
+
+@expenses_route.route('/gasto-<id>/delete', methods=['GET', 'DELETE'], defaults={'id': None})
+def delete_expense(id):
+    if not id:
+        return redirect(url_for('expenses.home'))
+    
+    return render_template('expenses/delete.html')

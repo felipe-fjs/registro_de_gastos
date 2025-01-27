@@ -1,0 +1,68 @@
+{% extends "base.html"}
+
+{% block head %} {% endblock %}
+
+{% block title %} {% endblock %}
+
+{% block content %}
+    <main>
+        {% if expense %}
+            <h1 class="alert alert-darger">Deseja confirmar a exclusão do gasto:</h1>
+            <form action="{{ url_for('expenses.delete', id=expense.id)}}" id="form_delete">
+                <p>
+                    <label for="title" class="form-label">Título</label>
+                    <input type="text" name="title" id="title" value="{{ expense.title }}" disabled class="form-control">
+                </p>
+                <button type="submit" class="btn btn-danger">Excluir</button>
+                <button onclick="return_home()" class="btn btn-primary">Cancelar</button>
+            </form>
+        {% else %}
+            <h1 class="alert alert-warning">Gasto não localizado!</h1>
+        {% endif %}
+        
+    </main>
+{% endblock %}
+
+{% block javascript %} 
+    <script>
+        function return_home(){
+            window.location.href = '{{ expenses.home }}'
+        }
+
+        function countdown(start){
+            let count = start ;
+
+            const timer = setInterval(()=> {
+                count--
+                
+                if (count == 0) {
+                    clearInterval(timer)
+                }
+            }, 1000)
+        }
+
+        document.getElementById('form_delete').addEventListener('click', (event)=> {
+            event.preventDefault()
+
+            let url = "{{ url_for('expenses.delete', id=expense.id) }}"
+
+            fetch(url, {
+                method: 'DELETE'
+            })
+            .then((response) => {
+                countdown(1.5) // irá dar tempo de 1.5 segundos para a animação de carregamento
+                return response.json()
+            })
+            .then((data)=> {
+                if (data['excluded']) {
+
+                    return_home()
+                } else {
+                    return_home()
+                }
+            })
+
+        })
+
+    </script>
+{% endblock %}
