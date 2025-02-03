@@ -13,7 +13,7 @@ expenses_route = Blueprint('expenses', __name__)
 @expenses_route.route('/inicio')
 @login_required
 def home():
-    expenses = Expenses.query.filter_by(user_id=current_user.id)
+    expenses = Expenses.query.filter_by(user_id=current_user.id).all()
     return render_template('expenses/home.html', expenses=expenses)
 
 @expenses_route.route("/novo-gasto", methods=['GET', 'POST'])
@@ -48,27 +48,32 @@ def new_expense():
     return render_template("expenses/new.html", local=local, category=category)
 
 
+@expenses_route.route('/gasto-<id>/', methods=['GET'], defaults={'title': ''})
 @expenses_route.route('/gasto-<id>/<title>', methods=['GET'])
 @login_required
 def read_expense(id, title):
     if not id:
+        flash('O ID do gasto não foi atribuido!')
         return redirect(url_for('expenses.home'))
     
     expense = Expenses.query.filter_by(id=id, user_id=current_user.id).first()
     return render_template('expenses/read.html', expense=expense)
 
 
+@expenses_route.route('/gasto-<id>/edit', methods=['GET', 'PUT'], defaults={'title': ''})
 @expenses_route.route('/gasto-<id>/<title>/edit', methods=['GET', 'PUT'])
 @login_required
-def edit_expense(id):
+def edit_expense(id, title):
     if not id:
         return redirect(url_for('expenses.home'))
     
-    return ''
+    expense = Expenses.query.filter_by(id=id).first()
+    return render_template('expenses/edit.html', expense=expense)
 
 
+@expenses_route.route('/gasto-<id>/delete', methods=['GET', 'DELETE'], defaults={'title': ''})
 @expenses_route.route('/gasto-<id>/<title>/delete', methods=['GET', 'DELETE'])
-def delete_expense(id):
+def delete_expense(id, title):
     if not id:
         return redirect(url_for('expenses.home'))
     
