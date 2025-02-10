@@ -1,6 +1,6 @@
-from app import db, login_manager, bcrypt
+from app import db, bcrypt
 from flask_login.mixins import UserMixin
-from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, Date
+from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, Date, Float
 import datetime
 
 class User(db.Model, UserMixin):
@@ -30,3 +30,11 @@ class Profile(db.Model):
     created_at = Column(DateTime(), default=current_time(), nullable=False)
     updated_at = Column(DateTime(), default=current_time(), onupdate=current_time(), nullable=False)
     
+
+class Balance(db.Model):
+    __tablename__ = 'balances'
+
+    id = Column(Integer, primary_key=True, nullable=False)
+    user_id = Column(Integer, ForeignKey('users.id'), unique=True, nullable=False)
+    total = Column(Float(precision=2), nullable=False, default=0.00)
+    update_at = Column(DateTime(), default=current_time(), onupdate=current_time(), nullable=False)
