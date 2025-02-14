@@ -6,7 +6,7 @@ from ...models.category import Category
 categories_route = Blueprint('categories', __name__)
 
 @categories_route.route('/nova-categoria', methods=['GET', 'POST'])
-def new_category():
+def new():
     if request.method == 'POST':
         try:
             new_cat = Category()
