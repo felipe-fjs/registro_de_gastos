@@ -3,7 +3,7 @@ from sqlalchemy.exc import SQLAlchemyError
 from app import db
 from ...models.category import Category
 
-categories_route = Blueprint('categories', __name__)
+categories_route = Blueprint('category', __name__)
 
 @categories_route.route('/nova-categoria', methods=['GET', 'POST'])
 def new():
