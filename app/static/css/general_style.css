@@ -13,6 +13,14 @@ body, html {
     background-color: #B3C5D7;
 }
 
+.navbar-brand {
+    color: white;
+}
+
+.navbar-brand:hover {
+    color: white;
+}
+
 .navbar-color {
     background-color: #22577A;
     border-radius: 0 0 10px 10px;
@@ -105,6 +113,7 @@ main {
 }
 
 .expenses_form {
+    margin: auto;
     width: 80%;
     border-radius: 10px;
     padding: 10px;
