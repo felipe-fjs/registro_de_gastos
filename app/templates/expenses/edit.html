@@ -32,7 +32,7 @@
                     <button type="submit" class="btn btn-success">
                         Confirmar
                     </button>
-                    <a href="{{ url_for('expenses.delete_expense', id=expense.id)}}" class="btn btn-danger">
+                    <a href="{{ url_for('expenses.delete', id=expense.id)}}" class="btn btn-danger">
                         Excluir
                     </a>
                 </p>
@@ -46,6 +46,31 @@
         document.getElementById('expense_form').addEventListener('submit', (event) => {
             event.preventDefault()
 
+            var link = "{{ url_for('expenses.update', id=expense.id)}}"
+
+            const data_update = {
+                title: document.getElementById('title').value,
+                category: document.getElementById('category').value,
+                total: document.getElementById('total').value,
+                local: document.getElementById('local').value,
+                data: document.getElementById('data').value,
+            }
+
+            fetch(link, {
+                method: "PUT",
+                body: JSON.stringify(data_update),
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8'
+                }   
+            })
+            .then(response => response.json())
+            .then((data) => {
+                if (data['success']) {
+                    window.location.href = '{{ url_for("expenses.read", id=expense.id) }}'
+                } else {
+                    // colocar para exibir um aviso de que não foi feito o update
+                }
+            })
         })
     </script>
 {% endblock %}

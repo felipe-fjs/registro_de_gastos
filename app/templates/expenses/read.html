@@ -29,13 +29,13 @@
                     <input type="datetime-local" name="data" id="data" class="form-control" value="{{ expense.date }}" disabled>
                 </p>
                 <p>
-                    <a href="{{ url_for('expenses.edit', id=expense.id, title=expense.title)}}" class="btn btn-primary">
+                    <a href="{{ url_for('expenses.update', id=expense.id, title=expense.title)}}" class="btn btn-primary">
                         Editar
                     </a>
-                    <a href="{{ url_for('expenses.delete', id=expense.id, title=expense.title)}}"q class="btn btn-danger">
+                    <a href="{{ url_for('expenses.delete', id=expense.id, title=expense.title) }}" class="btn btn-danger">
                         Excluir
                     </a>
-                </p>
+                </p> 
             </form>
         </section>
     </main>

@@ -59,11 +59,13 @@ def read(id, title):
     expense = Expenses.query.filter_by(id=id, user_id=current_user.id).first()
     return render_template('expenses/read.html', expense=expense)
 
-
 @expenses_route.route('/gasto-<id>/edit', methods=['GET', 'PUT'], defaults={'title': ''})
 @expenses_route.route('/gasto-<id>/<title>/edit', methods=['GET', 'PUT'])
 @login_required
-def edit(id, title):
+def update(id, title):
+    if request.method == 'PUT':
+        pass
+    
     if not id:
         return redirect(url_for('expenses.home'))
     
