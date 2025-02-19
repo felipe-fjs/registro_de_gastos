@@ -17,9 +17,13 @@
                 <section class="expenses-card-section">
                     {% for expense in expenses %}
                         <div class="expense-card">
-                            <h3 class="expense-card-title"><a href="{{ url_for('expenses.read', id=expense.id, title=expense.title)}}">{{ expense.title}}</a></h3>
+                            <h3 class="expense-card-title">
+                                <a href="{{ url_for('expenses.read', id=expense.id, title=expense.title)}}">
+                                    {{ expense.title }}
+                                </a>
+                            </h3>
                             <span class="expense-card-info">
-                                <span class="expense-card-category">categoria: {{ expense.get_category_name() }}</span>
+                                <span class="expense-card-category">local: {{ expense.get_local_name() }}</span>
                                 <span class="expense-card-amount">valor: R$ {{ expense.amount }}</span>
                                 <span class="expense-card-data">data: {{ expense.get_date()  }}</span>
                             </span>
