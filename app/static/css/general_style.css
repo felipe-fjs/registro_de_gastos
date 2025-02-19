@@ -13,55 +13,25 @@ body, html {
     background-color: #B3C5D7;
 }
 
-header.header {
-    height: min-content;
+.navbar-color {
     background-color: #22577A;
-
-    padding: 5px 10px;
     border-radius: 0 0 10px 10px;
-    box-shadow: 0 1px 1px 0.5px rgba(0, 0, 0, 0.442);
+    box-shadow: 0 0 2.5px 1px rgba(0, 0, 0, 0.485);
+
 }
 
-.navbar {
-    padding: 0;
-    display: flex;
-    flex-flow: column;
-    align-items: flex-start;
+.nav-item:hover {
+    font-weight: bold;
     
-    max-height: 0;
-    overflow-y: hidden;
-
-    transition: max-height .75s ease-in-out;
 }
 
-.navbar-title-section {
-    padding: 0 1px;
-    height: 40px;
-}
-
-.navbar-title {
-    display: inline-block;
-    font-size: 28px;
-    margin: 0;
-    height: 40px;
+.nav-link {
     color: white;
-    text-shadow: 0 0 1px black;
+    transition: color .2s ease-in-out;
 }
 
-.menu-burguer {
+.nav-link:hover {
     color: white;
-    font-size: 28px;
-    height: 100%;
-    vertical-align: middle;
-
-    cursor: pointer;
-}
-
-.navbar-link{
-    display: block;
-    color: white;
-    text-shadow: 0 0 1px black;
-    text-decoration: none;
 }
 
 main {
@@ -70,13 +40,7 @@ main {
     padding: 10px;
 }
 
-/* @media screen and (min-width: 1080px) {
-    main {
-        width: 400px;
-    }
-} */
-
-.expenses_section, .account-form-section {
+.account-form-section {
     width: 100%;
     height: fit-content;
 
