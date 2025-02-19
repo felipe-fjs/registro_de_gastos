@@ -18,7 +18,7 @@ def home():
 
 @expenses_route.route("/novo-gasto", methods=['GET', 'POST'])
 @login_required
-def new_expense():
+def new():
     if request.method == 'POST':
         try:
             # cria o novo gasto
@@ -51,7 +51,7 @@ def new_expense():
 @expenses_route.route('/gasto-<id>/', methods=['GET'], defaults={'title': ''})
 @expenses_route.route('/gasto-<id>/<title>', methods=['GET'])
 @login_required
-def read_expense(id, title):
+def read(id, title):
     if not id:
         flash('O ID do gasto não foi atribuido!')
         return redirect(url_for('expenses.home'))
@@ -63,7 +63,7 @@ def read_expense(id, title):
 @expenses_route.route('/gasto-<id>/edit', methods=['GET', 'PUT'], defaults={'title': ''})
 @expenses_route.route('/gasto-<id>/<title>/edit', methods=['GET', 'PUT'])
 @login_required
-def edit_expense(id, title):
+def edit(id, title):
     if not id:
         return redirect(url_for('expenses.home'))
     
@@ -73,7 +73,8 @@ def edit_expense(id, title):
 
 @expenses_route.route('/gasto-<id>/delete', methods=['GET', 'DELETE'], defaults={'title': ''})
 @expenses_route.route('/gasto-<id>/<title>/delete', methods=['GET', 'DELETE'])
-def delete_expense(id, title):
+@login_required
+def delete(id, title):
     if not id:
         return redirect(url_for('expenses.home'))
     
