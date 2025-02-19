@@ -1,0 +1,65 @@
+.main-home {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.expenses-section {
+    width: 100%;
+
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+
+    background-color: rgba(240, 248, 255, 0.364);
+    border-radius: 10px;
+    padding: 5px;
+    
+    transition: width .5s ease-in-out;
+}
+/* EDITANDO A SECTION PARA OS GASTOS NA --HOME-- */
+.expenses-summary-section {
+    width: 100%;
+    height: fit-content;
+    border-radius: 10px;
+    background-color: rgba(240, 248, 255, 0.364);
+
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+
+    margin-bottom: 15px;
+    padding: 5px 5px;
+
+}
+
+.total-spent-card, .balance-card, .expenses-count-card {
+    display: flex;
+    align-items: center;
+    padding: 0 5px;
+    width: 100px;
+    background-color: aqua;
+    border-radius: 10px;
+}
+
+.expenses-card-section {
+
+}
+
+.expense-card {
+    background-color: rgba(255, 255, 255, 0.403);
+    border-radius: 5px;
+    padding: 3px;
+}
+
+.expense-card-info {
+    background-color: rgba(0, 255, 255, 0.225);
+    border-radius: 5px;
+    padding: 1px 4px;   
+}
+
+@media screen and (min-width: 920px) {
+    .expenses-section {
+        width: 760px;
+    }
+} 
