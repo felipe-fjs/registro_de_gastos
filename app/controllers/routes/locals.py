@@ -50,3 +50,29 @@ def read(id):
     # futuramente adicionar tabela com gastos que foram feito nesse local
     return render_template('locals/read.html', local=local)
 
+@locals_route.route('/locais/<id>/editar/', methods=['GET', 'PUT'])
+@login_required
+def update(id):
+    if request.method == 'PUT':
+        try:
+            local = Local.query.filter_by(id=id, user_id=current_user.id).first()
+            local_updated = request.json
+            
+            local.name = local_updated.name   
+
+            db.session.commit()
+            result = True
+
+        except SQLAlchemyError as error:
+            result = False
+        finally:
+            db.session.close()
+            return jsonify(success=result)
+        
+    try:
+        local = Local.query.filter_by(id=id).first()
+    except SQLAlchemyError as error:
+        pass
+
+    return render_template('locals/update.html', local=local)
+
