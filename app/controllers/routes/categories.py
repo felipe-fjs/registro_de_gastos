@@ -49,7 +49,7 @@ def read(id):
 
     return render_template('categories/read.html', category=category)
 
-@categories_route.route('/categorias/<id>/editar/')
+@categories_route.route('/categorias/<id>/editar/', methods=['GET', 'PUT'])
 @login_required
 def update(id):
     if request.method == 'PUT':
@@ -75,7 +75,23 @@ def update(id):
 
     return render_template('categories/update.html', category=category)
 
-@categories_route.route('/')
+@categories_route.route('/categorias/<id>/excluir/', methods=['GET', 'DELETE'])
 @login_required
 def delete(id):
-    pass
+    if request.method == 'DELETE':
+        try:
+            category_tb_deleted = Category.query.filter_by(id=id, user_id=current_user.id).first()
+            
+            db.session.delete(category_tb_deleted)
+            db.session.commit()
+            result = True
+        except SQLAlchemyError as error:
+            # log de error, mais a frente
+            result = False
+
+        finally:
+            return jsonify(success=result)
+        
+    category = Category.query.filter_by(id=id, user_id=current_user.id).first()
+    return render_template('categories/delete.html', category=category)
+        
