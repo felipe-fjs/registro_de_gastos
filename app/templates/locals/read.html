@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %} {{ local.name }}{% endblock %}
+
+{% block content %}
+
+<main>
+    <section class="expenses_section">
+        <form class="expenses_form" aria-disabled="true" >
+            <p>
+                <label for="name" class="form-label">Categoria</label>
+                <input type="text" class="form-control" aria-readonly="true" disabled readonly name="name" id="name" value="{{ local.name }}">
+            </p>
+            <p>
+                <a href="{{ url_for('locals.update', id=local.id) }}" class="btn btn-warning ">Editar</a>
+                <a href="{{ url_for('local.delete', id=local.id) }}" class="btn btn-danger">Excluir</a>
+            </p>
+        </form>
+        <h1> Futura tabela contendo os gastos registrados nesse local</h1>
+    </section>
+</main>
+{% endblock %}
