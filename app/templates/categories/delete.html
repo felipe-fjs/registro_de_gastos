@@ -1,0 +1,70 @@
+{% extends "base.html"}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/expenses/style.css') }}">
+{% endblock %}
+
+{% block title %} {{ category.name }} {% endblock %}
+
+{% block content %}
+    <main>
+        {% if expense %}
+            <h1 class="alert alert-darger">Deseja confirmar a exclusão da categoria?</h1>
+            <form action="{{ url_for('categories.delete', id=category.id)}}" id="form_delete">
+                <p>
+                    <label for="name" class="form-label">Nome</label>
+                    <input type="text" name="name" id="name" value="{{ category.name }}" disabled class="form-control">
+                </p>
+                <button type="submit" class="btn btn-danger">Excluir</button>
+                <button onclick="return_home()" class="btn btn-primary">Cancelar</button>
+            </form>
+        {% else %}
+            <h1 class="alert alert-warning">Gasto não localizado!</h1>
+        {% endif %}
+        
+    </main>
+{% endblock %}
+
+{% block javascript %} 
+    <script>
+        function return_home(){
+            window.location.href = '{{ url_for("categories.home") }}'
+        }
+
+        function countdown(start){
+            let count = start ;
+
+            const timer = setInterval(()=> {
+                count--
+                
+                if (count == 0) {
+                    clearInterval(timer)
+                }
+            }, 1000)
+        }
+
+        document.getElementById('form_delete').addEventListener('click', (event)=> {
+            event.preventDefault()
+
+            let url = "{{ url_for('categories.delete', id=categories.id) }}"
+
+            fetch(url, {
+                method: 'DELETE'
+            })
+            .then((response) => {
+                countdown(1.5) // irá dar tempo de 1.5 segundos para a animação de carregamento
+                return response.json()
+            })
+            .then((data)=> {
+                if (data['excluded']) {
+
+                    return_home()
+                } else {
+                    return_home()
+                }
+            })
+
+        })
+
+    </script>
+{% endblock %}
