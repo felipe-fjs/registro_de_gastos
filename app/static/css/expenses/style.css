@@ -22,11 +22,12 @@
     width: 100%;
     height: fit-content;
     border-radius: 10px;
-    background-color: rgba(240, 248, 255, 0.364);
+    background-color: rgba(255, 255, 255, 0.403);
 
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
+    align-items: center;
 
     margin-bottom: 15px;
     padding: 5px 5px;
@@ -37,19 +38,44 @@
     display: flex;
     align-items: center;
     padding: 0 5px;
-    width: 100px;
-    background-color: aqua;
+    width: fit-content;
+    height: 60px;
+    background-color: rgb(220, 238, 254);
     border-radius: 10px;
 }
 
-.expenses-card-section {
+.total-spent-card, .balance-card, .expenses-count-card {
+    background-color: rgb(184, 222, 255);
+    flex-flow: column;
+    justify-content: center;
+    padding: 10px;
+}
 
+.total-spent-title {
+}
+
+.total-spent-amount, .balance-amount, .expenses-count-quant {
+    align-self: flex-end;
+}
+
+.expenses-card-section {
+    background-color: rgba(255, 255, 255, 0.403);
+    border-radius: 5px;
+    padding: 5px;
 }
 
 .expense-card {
-    background-color: rgba(255, 255, 255, 0.403);
+    /* background-color: rgba(255, 255, 255, 0.403); */
+    background-color: rgb(184, 222, 255);
     border-radius: 5px;
     padding: 3px;
+    cursor: pointer;
+
+    transition: box-shadow .25s ease-in-out;
+}
+
+.expense-card:hover {
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
 }
 
 .expense-card-title a {
