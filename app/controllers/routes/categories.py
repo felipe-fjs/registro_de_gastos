@@ -1,11 +1,10 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash
+from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify
 from flask_login import login_required, current_user
 from sqlalchemy.exc import SQLAlchemyError
 from app import db
 from ...models.category import Category
 
 categories_route = Blueprint('categories', __name__)
-
 
 @categories_route.route('/categorias')
 @login_required
@@ -50,10 +49,31 @@ def read(id):
 
     return render_template('categories/read.html', category=category)
 
-@categories_route.route('/')
+@categories_route.route('/categorias/<id>/editar/')
 @login_required
 def update(id):
-    pass
+    if request.method == 'PUT':
+        try:
+            category = Category.query.filter_by(id=id, user_id=current_user.id).first()
+            category_updated = request.json
+            
+            category.name = category_updated.name   
+
+            db.session.commit()
+            result = True
+
+        except SQLAlchemyError as error:
+            result = False
+        finally:
+            db.session.close()
+            return jsonify(success=result)
+        
+    try:
+        category = Category.query.filter_by(id=id).first()
+    except SQLAlchemyError as error:
+        pass
+
+    return render_template('categories/update.html', category=category)
 
 @categories_route.route('/')
 @login_required
