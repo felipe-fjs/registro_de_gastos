@@ -93,6 +93,19 @@ def update(id, title):
 @expenses_route.route('/gasto-<id>/<title>/delete', methods=['GET', 'DELETE'])
 @login_required
 def delete(id, title):
+    if request.method == 'DELETE':
+        try:
+            expense = Expenses.query.filter_by(id=id).first()
+            db.session.delete(expense)
+            db.session.commit()
+            
+            flash('Gasto excluido com sucesso!')
+            return jsonify(success=True)
+            
+        except: 
+            flash('Erro ao excluir gasto!')
+            return jsonify(success=False)
+        
     if not id:
         return redirect(url_for('expenses.home'))
     
