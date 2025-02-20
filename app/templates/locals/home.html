@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %} Locais {% endblock %}
+
+{% block head %}     
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/expenses/style.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<main class="main-home">
+    <section class="expenses-section">
+        {% if locals %}
+            <table>
+                <h3>Categorias registradas</h3>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>nome categoria</th>
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    {% for local in locals %}
+                        <tr>
+                            <td>
+                                <a href="{{ url_for('locals.read', id=local.id) }}">{{ local.id }}</a>
+                            </td>
+                            <td>
+                                <a href="{{ url_for('locals.read', id=local.id) }}">{{ local.name }}</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <h1>Nenhum local registrado!</h1>
+        {% endif %}
+    </section>
+</main>
+{% endblock %}
