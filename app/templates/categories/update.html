@@ -22,8 +22,8 @@
                 <input type="text" class="form-control" name="name" id="name" value="{{ category.name }}">
             </p>
             <p>
-                <button class="btn btn-primary" type="submit">Registrar</button>
-                <button class="btn btn-warning" type="reset">Limpar</button>
+                <button class="btn btn-primary" type="submit">Confirmar</button>
+                <a href="{{ url_for('categories.read', id=category.id) }}" class="btn btn-secondary" type="reset">Cancelar</a>
             </p>
         </form>
     </section>
