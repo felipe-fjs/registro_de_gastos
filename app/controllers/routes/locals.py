@@ -76,3 +76,23 @@ def update(id):
 
     return render_template('locals/update.html', local=local)
 
+@locals_route.route('/locais/<id>/excluir/', methods=['GET', 'DELETE'])
+@login_required
+def delete(id):
+    if request.method == 'DELETE':
+        try:
+            local_tb_deleted = Local.query.filter_by(id=id, user_id=current_user.id).first()
+            
+            db.session.delete(local_tb_deleted)
+            db.session.commit()
+            result = True
+        except SQLAlchemyError as error:
+            # log de error, mais a frente
+            result = False
+
+        finally:
+            return jsonify(success=result)
+        
+    local = Local.query.filter_by(id=id, user_id=current_user.id).first()
+    return render_template('categories/delete.html', local=local)
+        
