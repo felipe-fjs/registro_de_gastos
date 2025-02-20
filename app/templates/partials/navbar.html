@@ -18,7 +18,7 @@
                       </a>
                       <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="{{ url_for('expenses.new') }}">Novo Gasto</a></li>
-                        <li><a class="dropdown-item" href="#">Listar Gastos</a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('expenses.home')}}">Listar Gastos</a></li>
                       </ul>
                     </li> 
                     <li class="nav-item dropdown">
@@ -26,8 +26,8 @@
                         Categorias
                       </a>
                       <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{{ url_for('category.new') }}">Nova Categoria</a></li>
-                        <li><a class="dropdown-item" href="#">Listar Categorias</a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('categories.new') }}">Nova Categoria</a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('categories.home') }}">Listar Categorias</a></li>
                       </ul>
                     </li>   
                     <li class="nav-item">
