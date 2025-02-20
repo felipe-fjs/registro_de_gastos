@@ -6,10 +6,16 @@
 
 <main>
     <section class="expenses_section">
-        <form class="expenses_form" action="{{ url_for('categories.new_category')}}" method="post">
+        {% set messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+        <form class="expenses_form" action="{{ url_for('categories.new') }}" method="post">
             <p>
                 <label for="name" class="form-label">Categoria</label>
-                <input type="text" class="form-control" name="name" id="name" required maxlength="">
+                <input type="text" class="form-control" name="name" id="name" required maxlength="60">
             </p>
             <p>
                 <button class="btn btn-primary" type="submit">Registrar</button>
