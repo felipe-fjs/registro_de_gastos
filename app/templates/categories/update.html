@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %} Categoria - {{ category.name }}{% endblock %}
+
+{% block head %}     
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/expenses/style.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<main>
+    <section class="expenses_section">
+        {% set messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+        <form class="expenses_form" id="update_form">
+            <p>
+                <label for="name" class="form-label">Categoria</label>
+                <input type="text" class="form-control" name="name" id="name" value="{{ category.name }}">
+            </p>
+            <p>
+                <button class="btn btn-primary" type="submit">Registrar</button>
+                <button class="btn btn-warning" type="reset">Limpar</button>
+            </p>
+        </form>
+    </section>
+</main>
+{% endblock %}
+
+{% block javascript %}
+    <script>
+        document.getElementById('update_form').addEventListener('submit', (event) => {
+            event.preventDefault()
+
+            fetch("{{ url_for('categories.update', id=category.id) }}", {
+                method: "PUT",
+                body: JSON.stringify({
+                    id: "{{ category.id }}",
+                    name: document.getElementById('name').value,
+                    user_id: "{{ current_user.id }}"
+                }),
+                headers: {
+                    'Content-type': "application/json; charset=UTF-8",
+                },
+            })
+            .then(response => response.json())
+            .then((data) => {
+                if (data['success']) {
+                    window.location.href = '{{ url_for("categories.read", id=category.id) }}'
+                } else {
+                    // disparar ou criar com JS um aviso de erro ao registrar a edição
+                }
+            })
+            .catch() // caso haja um erro, estudar posteriormente apra saber mais....
+        })
+    </script>
+{% endblock %}
