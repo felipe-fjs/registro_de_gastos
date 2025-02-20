@@ -9,11 +9,11 @@
         <form class="expenses_form" aria-disabled="true" >
             <p>
                 <label for="name" class="form-label">Categoria</label>
-                <input type="text" class="form-control" aria-readonly="true" disabled name="name" id="name" value="{{ category.name }}">
+                <input type="text" class="form-control" aria-readonly="true" disabled readonly name="name" id="name" value="{{ category.name }}">
             </p>
             <p>
-                <a href="{{ url_for('categories.update') }}" class="btn btn-warning ">Editar</a>
-                <a href="{{ url_for('categories.delete') }}" class="btn btn-danger">Excluir</a>
+                <a href="{{ url_for('categories.update', id=category.id) }}" class="btn btn-warning ">Editar</a>
+                <a href="{{ url_for('categories.delete', id=category.id) }}" class="btn btn-danger">Excluir</a>
             </p>
         </form>
         <h1> Futura tabela contendo os gastos registrados com essa categoria</h1>
