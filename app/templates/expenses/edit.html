@@ -7,7 +7,7 @@
 {% block content %}
     <main>
         <section class="expenses-section">
-            <form class="expenses_form">
+            <form class="expenses_form" id="expense_form">
                 <p>
                     <label for="title">Titulo</label>
                     <input type="text" name="title" id="title" class="form-control" value="{{ expense.title }}">
@@ -66,11 +66,13 @@
             .then(response => response.json())
             .then((data) => {
                 if (data['success']) {
+                    
                     window.location.href = '{{ url_for("expenses.read", id=expense.id) }}'
                 } else {
                     // colocar para exibir um aviso de que não foi feito o update
                 }
             })
+            .catch(error=>error.json())
         })
     </script>
 {% endblock %}

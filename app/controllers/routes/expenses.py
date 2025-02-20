@@ -1,5 +1,5 @@
 from app import db
-from flask import Blueprint, request, render_template, redirect, url_for, flash
+from flask import Blueprint, request, render_template, redirect, url_for, flash, jsonify
 from flask_login import current_user, login_required
 from sqlalchemy.exc import SQLAlchemyError
 from ...models.expenses import Expenses
@@ -64,9 +64,25 @@ def read(id, title):
 @login_required
 def update(id, title):
     if request.method == 'PUT':
-        pass
-    
+        try:
+            expense_updated = request.json
+            expense_tobe_updated = Expenses.query.filter_by(id=expense_updated.id).first()
+
+            expense_tobe_updated.title = expense_updated.title
+            expense_tobe_updated.amount = expense_updated.amount
+            expense_tobe_updated.date = expense_updated.date
+            expense_tobe_updated.category_id = expense_updated.category_id
+            expense_tobe_updated.local_id = expense_updated.local_id
+
+            db.session.commit()
+            flash(f"O gasto '{expense_updated.title[10]}...' foi atualizado!")
+            return jsonify(success=True)
+        except:
+            flash("Ocorreu um erro ao atualizar o gasto!")
+            return jsonify(success=False)
+
     if not id:
+        flash('Gasto não localizado!')
         return redirect(url_for('expenses.home'))
     
     expense = Expenses.query.filter_by(id=id).first()
