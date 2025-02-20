@@ -40,3 +40,13 @@ def new():
 
     return render_template('locals/new.html')
 
+@locals_route.route('/locais/<id>/')
+@login_required
+def read(id):
+    if not id:
+        flash("Erro ao recuperar a categoria! (ID não recebido)")
+
+    local = Local.query.filter_by(id=id, user_id=current_user.id).first()
+    # futuramente adicionar tabela com gastos que foram feito nesse local
+    return render_template('locals/read.html', local=local)
+
