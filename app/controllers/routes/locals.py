@@ -4,9 +4,9 @@ from sqlalchemy.exc import SQLAlchemyError
 from app import db
 from ...models.local import Local
 
-categories_route = Blueprint('locals', __name__)
+locals_route = Blueprint('locals', __name__)
 
-@categories_route.route('/locais')
+@locals_route.route('/locais')
 @login_required
 def home():
     try:
