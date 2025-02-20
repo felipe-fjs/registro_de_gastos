@@ -15,3 +15,28 @@ def home():
         pass
     return render_template('locals/home.html', locals=locals)
 
+@locals_route.route('/novo-local', methods=['GET', 'POST'])
+@login_required
+def new():
+    if request.method == 'POST':
+        try:
+            new_local = Local()
+            new_local.name = request.form.get('name')
+            new_local.user_id = current_user.id
+
+            db.session.add(new_local)
+            db.session.commit()
+
+            flash('Local registrado com sucesso!')
+
+        except SQLAlchemyError as error:
+            flash(f'Ocorreu um erro ao registrar o local "{request.form.get('name')}"')
+            # registro de log para erros
+            
+        finally:
+            db.session.close()
+
+        return redirect(url_for('locals.new'))
+
+    return render_template('locals/new.html')
+
