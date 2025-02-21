@@ -14,7 +14,8 @@ expenses_route = Blueprint('expenses', __name__)
 @login_required
 def home():
     expenses = Expenses.query.filter_by(user_id=current_user.id).all()
-    return render_template('expenses/home.html', expenses=expenses)
+    month_sum = Expenses.get_total_month()
+    return render_template('expenses/home.html', expenses=expenses, month_sum=month_sum)
 
 @expenses_route.route("/novo-gasto", methods=['GET', 'POST'])
 @login_required
@@ -36,7 +37,7 @@ def new():
         except SQLAlchemyError:
             flash(f"Ocorreu um erro ao registrar o gasto '{request.form.get('title')}'!")
     
-        return redirect(url_for('expenses.new_expense'))
+        return redirect(url_for('expenses.new'))
     
     # pegar informações de categorias e loais já cadastrados em bando de dados
     try:
