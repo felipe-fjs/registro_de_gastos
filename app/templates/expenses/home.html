@@ -10,9 +10,19 @@
         {% if expenses %}
             <section class="expenses-section">
                 <section class="expenses-summary-section">
-                    <span class="total-spent-card">R$ Gasto</span>
-                    <span class="balance-card">R$ EM conta</span>
-                    <span class="expenses-count-card">gastos realizados</span>
+                    <h2>Resumo</h2>
+                    <span class="total-spent-card">
+                        <span class="total-spent-title">Gasto do mês:</span>
+                        <span class="total-spent-amount">R$ {{ month_sum }} </span>
+                    </span>
+                    <span class="balance-card">
+                        <span class="balance-title">Total em conta: </span>
+                        <span class="balance-amount">R$1000.20</span>
+                    </span>
+                    <span class="expenses-count-card">
+                        <span class="expenses-count-title">gastos realizados</span>
+                        <span class="expenses-count-quant">7</span>
+                    </span>
                 </section>
                 <section class="expenses-card-section">
                     <h1>Gastos</h1>
