@@ -1,5 +1,7 @@
 from app import db
-from sqlalchemy import Column, Integer, Float, DateTime, ForeignKey, String
+from flask_login import current_user
+from sqlalchemy import Column, Integer, Float, DateTime, ForeignKey, String, extract
+from sqlalchemy.exc import SQLAlchemyError
 import datetime
 from .category import Category
 from .local import Local
@@ -28,3 +30,20 @@ class Expenses(db.Model):
     def get_date(self):
         date = datetime.datetime.strftime(self.date, format="%d/%m/%Y %H:%M")
         return date
+
+    def get_total_month():
+        try:
+            expenses = Expenses.query.filter_by(user_id=current_user.id).filter(
+                extract('month', Expenses.date) == datetime.datetime.now(datetime.timezone.utc).month,
+                extract('year', Expenses.date) == datetime.datetime.now(datetime.timezone.utc).year,
+            ).all()
+
+            sum = 0
+            for expense in expenses:
+                sum =sum + expense.amount
+            return f'{sum:.2f}'
+        except SQLAlchemyError:
+            # registrar em log futuramente
+            return 'erro'
+
+
