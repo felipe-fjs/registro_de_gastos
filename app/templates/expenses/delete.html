@@ -1,10 +1,10 @@
-{% extends "base.html"}
+{% extends "base.html" %}
 
 {% block head %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/expenses/style.css') }}">
 {% endblock %}
 
-{% block title %} {% endblock %}
+{% block title %} Excluir {{ expense.title }}{% endblock %}
 
 {% block content %}
     <main>
@@ -28,7 +28,7 @@
 {% block javascript %} 
     <script>
         function return_home(){
-            window.location.href = '{{ expenses.home }}'
+            window.location.href = '{{ url_for("expenses.home") }}'
         }
 
         function countdown(start){

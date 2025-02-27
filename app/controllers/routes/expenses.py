@@ -110,4 +110,9 @@ def delete(id, title):
     if not id:
         return redirect(url_for('expenses.home'))
     
-    return render_template('expenses/delete.html')
+    try:
+        expense = Expenses.query.filter_by(id=id).first()
+    except :
+        return redirect(url_for('expenses.read', id=id))
+    
+    return render_template('expenses/delete.html', expense=expense)

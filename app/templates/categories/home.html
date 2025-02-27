@@ -4,6 +4,7 @@
 
 {% block head %}     
     <link rel="stylesheet" href="{{ url_for('static', filename='css/expenses/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/categories/style.css') }}">
 {% endblock %}
 
 {% block content %}
@@ -11,8 +12,8 @@
 <main class="main-home">
     <section class="expenses-section">
         {% if categories %}
-            <table>
-                <h3>Categorias registradas</h3>
+        <h3>Categorias registradas</h3>
+            <table class="table">
                 <thead>
                     <tr>
                         <th>ID</th>
